@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#16130f"/>
+  <polygon points="120,190 160,120 190,160 230,110 280,190" fill="none" stroke="#e7c186" stroke-width="2"/>
+  <line x1="100" y1="190" x2="300" y2="190" stroke="#e7c186" stroke-width="1.5"/>
+  <text x="200" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="2" fill="#d1c5b6">PLACEHOLDER IMAGE</text>
+</svg>

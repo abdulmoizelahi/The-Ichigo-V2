@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="430" viewBox="0 0 300 430">
+  <rect width="300" height="430" fill="#16130f"/>
+  <rect x="10" y="10" width="280" height="410" fill="none" stroke="#e7c186" stroke-opacity="0.5" stroke-width="2"/>
+  <polygon points="150,120 190,200 110,200" fill="none" stroke="#e7c186" stroke-width="2"/>
+  <text x="150" y="270" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#e7c186">Cover 02</text>
+  <text x="150" y="300" text-anchor="middle" font-family="Georgia, serif" font-size="12" letter-spacing="2" fill="#d1c5b6">PLACEHOLDER ARTWORK</text>
+</svg>

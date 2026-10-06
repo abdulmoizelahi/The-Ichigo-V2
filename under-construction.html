@@ -1,0 +1,436 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Ichigo | Coming Soon</title>
+
+    <!-- Tailwind + same plugins as the home page -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Same typefaces as the home page -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Exact colour / type / spacing tokens from the home page so this page is a true sibling -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#16130f",
+              "surface-container-high": "#2d2925",
+              "surface-bright": "#3d3834",
+              "surface-container-lowest": "#110e0a",
+              "inverse-surface": "#e9e1da",
+              "surface-container-low": "#1e1b17",
+              secondary: "#e2c19b",
+              primary: "#e7c186",
+              surface: "#16130f",
+              "primary-fixed-dim": "#e7c186",
+              "on-primary": "#432c00",
+              "primary-container": "#c6a26a",
+              "on-surface": "#e9e1da",
+              "surface-container": "#221f1b",
+              "on-surface-variant": "#d1c5b6",
+              "surface-variant": "#38342f",
+              "outline-variant": "#4e453a",
+              "on-background": "#e9e1da",
+              background: "#16130f",
+              "surface-tint": "#e7c186",
+              outline: "#9a8f81",
+              "inverse-primary": "#765929",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "grid-margin": "4rem",
+              "section-gap": "8rem",
+              "stack-sm": "0.75rem",
+              "stack-lg": "3rem",
+              "stack-md": "1.5rem",
+              "grid-gutter": "2rem",
+            },
+            fontFamily: {
+              "headline-lg": ["EB Garamond"],
+              "headline-xl": ["EB Garamond"],
+              "label-caps": ["Manrope"],
+              "body-lg": ["Manrope"],
+              "body-md": ["Manrope"],
+              "display-lg": ["EB Garamond"],
+            },
+            fontSize: {
+              "headline-xl": [
+                "48px",
+                { lineHeight: "1.2", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "1.5",
+                  letterSpacing: "0.15em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "1.8",
+                  letterSpacing: "0.03em",
+                  fontWeight: "400",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "1.7",
+                  letterSpacing: "0.03em",
+                  fontWeight: "400",
+                },
+              ],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* ── Ambient warm glow behind the emblem (breathes seamlessly) ── */
+      .ambient-glow {
+        background: radial-gradient(
+          circle at center,
+          rgba(231, 193, 134, 0.14) 0%,
+          rgba(231, 193, 134, 0.05) 35%,
+          transparent 70%
+        );
+        animation: breathe 7s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          opacity: 0.55;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.12);
+        }
+      }
+
+      /* ── Concentric rings: linear 0deg→360deg loops are perfectly seamless ── */
+      .ring-spin {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: spin 26s linear infinite;
+      }
+      .ring-spin-rev {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: spin 20s linear infinite reverse;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ── Center icon float: identical 0% & 100% frames = no jump ── */
+      .icon-float {
+        animation: floatY 6s ease-in-out infinite;
+      }
+      @keyframes floatY {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /* ── Progress sheen: highlight starts and ends fully off-track,
+            so the loop reset is invisible (no jerk) ── */
+      .sheen-track {
+        position: relative;
+        overflow: hidden;
+        height: 1px;
+        width: 220px;
+        max-width: 60vw;
+        background: rgba(231, 193, 134, 0.16);
+      }
+      .sheen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 45%;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(231, 193, 134, 0.95) 50%,
+          transparent 100%
+        );
+        animation: sweep 3.4s linear infinite;
+      }
+      @keyframes sweep {
+        0% {
+          transform: translateX(-160%);
+        }
+        100% {
+          transform: translateX(420%);
+        }
+      }
+
+      /* ── Pulsing status dots ── */
+      .dot {
+        animation: dotPulse 1.6s ease-in-out infinite;
+      }
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes dotPulse {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ── Quiet, one-time entrance so the page settles gracefully ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+      .d1 {
+        animation-delay: 0.15s;
+      }
+      .d2 {
+        animation-delay: 0.3s;
+      }
+      .d3 {
+        animation-delay: 0.45s;
+      }
+      .d4 {
+        animation-delay: 0.6s;
+      }
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Respect users who prefer reduced motion ── */
+      @media (prefers-reduced-motion: reduce) {
+        .ambient-glow,
+        .ring-spin,
+        .ring-spin-rev,
+        .icon-float,
+        .sheen,
+        .dot {
+          animation: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          animation: none !important;
+        }
+        .ambient-glow {
+          opacity: 0.7;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-background text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary/30 selection:text-primary overflow-x-hidden"
+  >
+    <!-- Slim brand bar (mirrors the home nav without copying it) -->
+    <header class="w-full py-8 flex justify-center">
+      <a
+        href="index.html"
+        class="font-headline-xl text-[22px] md:text-[24px] text-primary italic tracking-tight"
+      >
+        The Ichigo
+      </a>
+    </header>
+
+    <!-- Main -->
+    <main
+      class="flex-1 flex flex-col items-center justify-center text-center px-6 pb-16"
+    >
+      <!-- Signature animated emblem -->
+      <div
+        class="reveal relative flex items-center justify-center mb-10 md:mb-12"
+      >
+        <div
+          class="ambient-glow absolute w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full"
+        ></div>
+
+        <div class="relative w-[180px] h-[180px] md:w-[210px] md:h-[210px]">
+          <svg viewBox="0 0 200 200" class="w-full h-full" fill="none">
+            <!-- Faint static outer circle -->
+            <circle
+              cx="100"
+              cy="100"
+              r="92"
+              stroke="#e7c186"
+              stroke-opacity="0.12"
+              stroke-width="1"
+            />
+
+            <!-- Rotating dotted ring -->
+            <circle
+              class="ring-spin"
+              cx="100"
+              cy="100"
+              r="92"
+              stroke="#e7c186"
+              stroke-opacity="0.55"
+              stroke-width="1.5"
+              stroke-dasharray="1.5 12"
+              stroke-linecap="round"
+            />
+
+            <!-- Counter-rotating sweeping arc -->
+            <circle
+              class="ring-spin-rev"
+              cx="100"
+              cy="100"
+              r="72"
+              stroke="#e7c186"
+              stroke-opacity="0.35"
+              stroke-width="1.5"
+              stroke-dasharray="60 400"
+              stroke-linecap="round"
+            />
+
+            <!-- Faint inner circle -->
+            <circle
+              cx="100"
+              cy="100"
+              r="54"
+              stroke="#e7c186"
+              stroke-opacity="0.14"
+              stroke-width="1"
+            />
+          </svg>
+
+          <!-- Floating pen icon at the center -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span
+              class="material-symbols-outlined icon-float text-5xl md:text-6xl"
+              >draw</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Eyebrow -->
+      <p
+        class="reveal d1 font-label-caps text-label-caps text-primary uppercase tracking-[0.3em] mb-6"
+      >
+        Under Construction
+      </p>
+
+      <!-- Headline -->
+      <h1
+        class="reveal d2 font-display-lg text-[40px] sm:text-[54px] md:text-[68px] leading-[1.1] tracking-tight text-on-surface mb-6"
+      >
+        This Page Is <br class="hidden sm:block" />
+        Being Crafted
+      </h1>
+
+      <!-- Sub copy -->
+      <p
+        class="reveal d3 font-body-lg text-body-md md:text-body-lg text-on-surface-variant max-w-xl mb-10"
+      >
+        We're drawing up something worth the wait. This corner of the studio
+        isn't quite ready yet — but the rest of the gallery is open and waiting
+        for you.
+      </p>
+
+      <!-- Progress indicator -->
+      <div class="reveal d3 flex flex-col items-center gap-4 mb-12">
+        <div class="sheen-track">
+          <div class="sheen"></div>
+        </div>
+        <p
+          class="font-label-caps text-[11px] text-on-surface-variant/70 uppercase tracking-[0.25em] flex items-center gap-2"
+        >
+          In Progress
+          <span class="flex gap-1">
+            <span
+              class="dot w-1 h-1 rounded-full bg-primary inline-block"
+            ></span>
+            <span
+              class="dot w-1 h-1 rounded-full bg-primary inline-block"
+            ></span>
+            <span
+              class="dot w-1 h-1 rounded-full bg-primary inline-block"
+            ></span>
+          </span>
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="reveal d4 flex flex-col sm:flex-row gap-4 items-center">
+        <a
+          href="index.html"
+          class="bg-primary text-on-primary px-10 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-secondary transition-colors duration-300 active:scale-95 flex items-center gap-2"
+        >
+          <span
+            class="material-symbols-outlined text-base"
+            style="color: inherit"
+            >arrow_back</span
+          >
+          Return Home
+        </a>
+        <a
+          href="index.html#contact"
+          class="border border-primary/40 text-primary px-10 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-primary/10 transition-colors duration-300"
+        >
+          Get In Touch
+        </a>
+      </div>
+    </main>
+
+    <!-- Minimal footer (echoes the home footer's tone) -->
+    <footer class="w-full border-t border-primary/10 py-8 px-6">
+      <p
+        class="text-[10px] text-on-surface-variant/40 tracking-[0.3em] font-label-caps uppercase text-center"
+      >
+        © 2024 The Ichigo. All Rights Reserved.
+      </p>
+    </footer>
+  </body>
+</html>
